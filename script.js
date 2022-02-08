@@ -6,7 +6,7 @@ let timeout
 
 let size = 2
 let difficulty = 2
-
+   
 function arrayEquals(a, b) {
     return Array.isArray(a) &&
         Array.isArray(b) &&
