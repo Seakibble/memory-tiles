@@ -19,20 +19,17 @@ function arrayEquals(a, b) {
 function flashSequence(index = 0) {
     $content.classList.add('locked')
     let $btn = document.getElementById(sequence[index])
-    setTimeout(() => {
-        $btn.classList.add('flash')
-    }, 400)
-    
+    $btn.classList.add('flash')    
 
     setTimeout(() => {
         $btn.classList.remove('flash')
         index++
-    }, 1200)
+    }, 800)
 
     setTimeout(() => {
         if (index < sequence.length) flashSequence(index)
         else $content.classList.remove('locked')
-    }, 1600)
+    }, 1200)
 }
 
 function makeGrid(_size) {
@@ -58,13 +55,22 @@ function makeGrid(_size) {
         sequence.push(Math.floor(Math.random()*_size*_size).toString())
     }
 
-    // flash sequence
-    flashSequence()
+    // flash sequence after short delay
+    setTimeout(() => {
+        flashSequence()
+    }, 800)    
 }
 
 
 $content.addEventListener('click', function (e) {
     if ($content.classList.contains('locked')) return
+    if (e.target === $content) return
+
+    // flash white on click
+    e.target.classList.add('clicked')
+    setTimeout(() => {
+        e.target.classList.remove('clicked')
+    }, 200)
         
     input.push(e.target.getAttribute('data-num'))
 
@@ -73,7 +79,7 @@ $content.addEventListener('click', function (e) {
         input = []
         sequence = []
         $content.classList.add('correct')
-        timeout = setTimeout(() => {
+        setTimeout(() => {
             $content.classList.remove('correct')
             difficulty++;
             if (difficulty >= size+3) {
@@ -87,7 +93,7 @@ $content.addEventListener('click', function (e) {
         $content.classList.add('locked')
         input = []        
         $content.classList.add('incorrect')
-        timeout = setTimeout(() => {
+        setTimeout(() => {
             $content.classList.remove('incorrect')
             flashSequence()
         }, 800)
