@@ -1,0 +1,37 @@
+body {
+    background: black;
+}
+
+#content {
+    display: grid;
+    width: 100vw;
+    max-width: 100vh;
+    height: 100vh;
+    max-height: 100vw;
+    grid-gap: 10px;
+    margin: 0 auto;
+    
+    transition: background 1s;
+}
+
+.tile {
+    background: #222;
+    transition: background 0.15s;
+}
+
+:not(.locked)>.tile:hover {
+    background: #aaa;
+    cursor: pointer;
+}
+
+.correct {
+    background: greenyellow;
+}
+
+.incorrect {
+    background: crimson;
+}
+
+.flash {
+    background: blue;
+}
